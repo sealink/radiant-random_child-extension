@@ -33,10 +33,10 @@ module RandomChild
       i += 1
     end
     if limit
-      result[0..(limit-1)].join
+      result[0..(limit-1)]
     else
       result
-    end
+    end.join
   end
 
   desc %{
