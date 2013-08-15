@@ -36,7 +36,7 @@ module RandomChild
       result[0..(limit-1)]
     else
       result
-    end.join
+    end.join.html_safe
   end
 
   desc %{
