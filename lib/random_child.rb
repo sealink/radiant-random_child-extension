@@ -28,6 +28,9 @@ module RandomChild
       tag.locals.page = item
       tag.locals.first_child = i == 0
       tag.locals.last_child = i == kids.length - 1
+      if limit
+        tag.locals.last_child = i == limit - 1
+      end
       tag.locals.index = i
       result << tag.expand
       i += 1
