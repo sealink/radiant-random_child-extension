@@ -21,22 +21,16 @@ module RandomChild
     tag.locals.previous_headers = {}
     limit = options[:limit] || false
     options = options.delete_if {|key, value| key == :order or key == :limit }
-    kids = children.find(:all, options).sort_by{rand}
-    i = 0
-    kids.each do |item|
+    kids = children.find(:all, options).sort_by{rand}[0..(limit-1)]
+    kids.each.with_index do |item, i|
       tag.locals.child = item
       tag.locals.page = item
       tag.locals.first_child = i == 0
       tag.locals.last_child = i == kids.length - 1
       tag.locals.index = i
       result << tag.expand
-      i += 1
     end
-    if limit
-      result[0..(limit-1)]
-    else
-      result
-    end.join.html_safe
+    result.join.html_safe
   end
 
   desc %{
